@@ -1,0 +1,27 @@
+service: 
+  name: LambdaToDynamoDB # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: ${opt:stage, 'dev'} # Set the default stage used. Default is dev
+  region: us-east-2
+
+plugins:
+  - serverless-webpack
+  - serverless-offline-sns
+  - serverless-offline
+
+functions:
+  actionToDynamoDb:
+    handler: handler.workWithDynamo
+    iamRoleStatementsInherit: true
+    iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb: "*"
+      Resource: "*"
+    events:
+      - http:
+          path: dynamoDb/action
+          method: get

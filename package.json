@@ -1,0 +1,51 @@
+{
+  "name": "LambdaToDynamoDB",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Tri Luong",
+  "license": "MIT",
+  "scripts": {
+    "build": "node_modules/.bin/webpack",
+    "test": "node_modules/.bin/mocha \"./{,!(node_modules)/**/}*.spec.ts\" -t 10000 --require ts-node/register --require mocha.env --reporter spec",
+    "watch": "node_modules/.bin/mocha \"./{,!(node_modules)/**/}*.spec.ts\" -t 10000 --require ts-node/register --require mocha.env --reporter spec --watch-extensions ts --watch"
+  },
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.20",
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.9.4",
+    "aws-lambda": "^0.1.2",
+    "babel-loader": "^8.0.5",
+    "chai": "^4.2.0",
+    "serverless": "^1.38.0",
+    "serverless-offline": "^4.5.1",
+    "serverless-offline-sns": "^0.52.0",
+    "serverless-webpack": "^5.2.0",
+    "ts-lint": "^4.5.1",
+    "ts-loader": "^5.3.3",
+    "ts-node": "^8.0.2",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/coverage/**",
+      "**/*.spec.ts",
+      "**/mocha.env.js",
+      "webpack.config.js",
+      "source-map-install.js",
+      "src/domain",
+      "dist",
+      "src/runner.ts",
+      "Swagger/**"
+    ],
+    "all": true
+  }
+}
